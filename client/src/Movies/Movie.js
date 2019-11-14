@@ -45,7 +45,7 @@ export default class Movie extends React.Component {
           Save
         </div>
         
-        <button onClick={() => this.props.history.push(`/update-movie/${this.movie.id}`)}>Edit</button>
+        <button onClick={() => this.props.history.push(`/update-movie/${this.props.match.params.id}`)}>Edit</button>
       </div>
     );
   }

@@ -9,27 +9,28 @@ const initialMovie = {
     stars: ""
 };
 
-const UpdateMoiveForm = props => {
-  const [Movie, setMovie] = useState(initialMovie);
+const UpdateMoiveForm = (props) => {
+    console.log(props.movies, "hello")
+  const [movie, setMovie] = useState(initialMovie);
   const changeHandler = ev => {
-    ev.persist();
+    
     let value = ev.target.value;
-    if (ev.target.name === 'price') {
-      value = parseInt(value, 10);
-    }
+   
     setMovie({
-      ...Movie,
+      ...movie,
       [ev.target.name]: value
     });
   };
 
   useEffect(() => {
-   
     if (props.movies.length > 0) {
+        
       const newMovie = props.movies.find(
         thing => `${thing.id}` === props.match.params.id
-      );
+     
+          );
       setMovie(newMovie);
+
     }
   }, [props.movies, props.match.params.id]);
 
@@ -37,9 +38,9 @@ const UpdateMoiveForm = props => {
 
     e.preventDefault();
     axios
-      .put(`http://localhost:5000/api/movies/${id}`, movie)
+      .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
       .then(res => {
-        props.updateMovies(res.data);
+        props.setMovies(res.data);
         props.history.push('/');
       })
       .catch(err => console.log(err));
@@ -93,6 +94,6 @@ const UpdateMoiveForm = props => {
       </form>
     </div>
   );
-};
+  };
 
 export default UpdateMoiveForm;
