@@ -10,7 +10,7 @@ const initialMovie = {
 };
 
 const UpdateMoiveForm = (props) => {
-    console.log(props.movies, "hello")
+
   const [movie, setMovie] = useState(initialMovie);
   const changeHandler = ev => {
     
